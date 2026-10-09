@@ -1,0 +1,13 @@
+name: AI Comment Moderator
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  check-comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Запуск проверки текста
+        run: python moderator.py
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
